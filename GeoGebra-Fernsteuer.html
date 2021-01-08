@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>GeoGebra-Fernsteuer</title>
+    <style type="text/css">
+      body, table {
+        font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size:14px;
+      }
+      h1, h2 {
+        color:#008EDA;
+      }
+      a:focus {
+        outline: thin dotted;
+      }
+      a:active, a:hover {
+        outline: 0;
+      }
+      a {
+        color: #428bca;
+        text-decoration: none;
+      }
+      a:hover, a:focus {
+        color: #2a6496;
+        text-decoration: underline;
+      }
+      a:focus {
+        outline: thin dotted #333;
+        outline: 5px auto -webkit-focus-ring-color;
+        outline-offset: -2px;
+      }
+    </style>
+    <!-- Falls direkt im Geogebra-Applett integrierte LaTeX-Formeln nicht korrekt dargestellt werden, muss in der gespeicherten Datei in der folgenden Zeile die neuere Version 5.0 durch die ältere Version 4.4 ersetzt werden: https://www.geogebra.org/web/5.0/web/web.nocache.js -->
+    <script type="text/javascript" src="https://quizdidaktik.de/daten/media/whiteboard-offline/daten/app/html/web3d/web3d.nocache.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+  function lade_seite() {
+      $('#i_externe_eingabezeile').val('');
+      $('#b_ausfuehren').bind('click', function() {
+          var kommando=$('#i_externe_eingabezeile').val();
+          try {
+//               debugger;
+              applet1.evalCommand(kommando);
+          } catch(e) {
+              console.log('Applet noch nicht geladen? ⇒ '+e);
+          }
+      });
+      $('#b_algebra_an').bind('click', function() {
+          try {
+              applet1.showAlgebraInput(true);
+          } catch(e) {
+              console.log('Applet noch nicht geladen? ⇒ '+e);
+          }
+      });
+      $('#b_algebra_aus').bind('click', function() {
+          try {
+              applet1.showAlgebraInput(false);
+          } catch(e) {
+              console.log('Applet noch nicht geladen? ⇒ '+e);
+          }
+      });
+  }
+  $(document).ready(function(){
+      lade_seite();
+  });
+</script>
+  </head>
+  <body>
+    <h1>GeoGebra-Applet - Fernsteuerung</h1>
+    <p><strong>Tipp: Betrachte mit <kbd>Strg</kbd>+<kbd>U</bkd> den Quelltext dieser Seite und lade
+       diesen für eigene Experimente zum Anpassen herunter!</strong></p>
+    <p><label for="i_externe_eingabezeile">Eingabezeile außerhalb des Applets:</label><br />
+       <input type="text" id="i_externe_eingabezeile" size="80" placeholder="A=(4,3)" /><input type="button" id="b_ausfuehren" value="ausführen"><br />
+       Hier können die im Algebra-Bereich¹ angezeigten Befehle
+       eingegeben und in das Applet unten übernommen werden.<br />
+       ¹ falls eingeblendet, ist dieser auf der linken Seite sichtbar
+    </p>
+    <p>
+      Interne Eingabezeile unten im Applet:
+      <input type="button" id="b_algebra_an" value="Anzeigen" />
+      <input type="button" id="b_algebra_aus" value="Ausblenden" />
+    </p>
+    <table>
+      <tr>
+        <td></td>
+        <th>Beispielkommandos</th>
+      </tr>
+      <tr>
+        <td>Setzen eines Punkts</td><td style="text-align:center;font-style:monospace;">A=(4,3)</td>
+      </tr>
+      <tr>
+        <td>Zeichnen eines Kreises</td><td style="text-align:center;font-style:monospace;">Circle[A,3]</td>
+      </tr>
+      <tr>
+        <td>Zeichnen einer Geraden</td><td style="text-align:center;font-style:monospace;">f: y = 0.75x</td>
+      </tr>
+    </table>
+    <article class="geogebraweb"
+             id="applet1"
+             data-param-id="applet1"
+             data-param-showMenubar="true"
+             data-param-showToolbar="true"
+             data-param-showAlgebraInput="false"
+             data-param-showResetIcon="true"
+             data-param-width="700"
+             data-param-height="500"
+             data-param-language="de"
+             data-param-ggbbase64="data:application/vnd.geogebra.file;base64,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"></article>
+    <p>erzeugt mit <a href="http://quizdidaktik.de/ggb2html/index.html" target="_blank">Geogebra2HTML</a></p>
+  </body>
+</html>
