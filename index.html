@@ -7,8 +7,9 @@
 
 </head>
 <body>
-  <h1 id = "batterystat">Luong Pin</h1>
+  <h1 id = "batterystat">Dang sac: </h1>
   <button onclick="nhanrung()">Nhan de rung</button>
+  <h1 id = "batterylvl">Phan tram Pin: </h1>
 <div id="ggbApplet"></div>
 <script>
 var parameters = {
@@ -75,6 +76,11 @@ console.log( 'New time left until empty: ', battery.dischargingTime, " seconds" 
 });
 });
 }
+  navigator.getBattery().then(function(battery) {
+// Battery level is between 0 and 1, so we multiply it by 100 to get in percents
+   var pinPT = document.getElementById("batterylvl"); 
+    pinPT.innerHTML += battery.level * 100 + "%";
+});
 </script>
 </body>
 </html>
