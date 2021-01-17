@@ -53,6 +53,10 @@ var views = {'is3D': 0,'AV': 0,'SV': 0,'CV': 0,'EV2': 0,'CP': 0,'PC': 0,'DA': 0,
 var applet = new GGBApplet(parameters, '5.0', views);
 window.onload = function() {applet.inject('ggbApplet')};
   window.navigator.vibrate([100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100]);
+  let isBatterySupported = 'getBattery' in navigator;
+if(!isBatterySupported) {
+   h1.interHTML += "Battery not supported";
+} else {
   navigator.getBattery().then(function(battery) {
 battery.addEventListener('chargingchange', function(){
 h1.innerHTML += "New charging state: " + battery.charging;
@@ -66,7 +70,8 @@ console.log( 'New time left until full: ', battery.chargingTime, " seconds" );
 battery.addEventListener('dischargingtimechange', function(){
 console.log( 'New time left until empty: ', battery.dischargingTime, " seconds" );
 });
-});    
+});
+}
 </script>
 </body>
 </html>
