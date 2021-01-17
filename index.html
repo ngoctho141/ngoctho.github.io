@@ -57,6 +57,16 @@ window.onload = function() {applet.inject('ggbApplet')};
 battery.addEventListener('chargingchange', function(){
 h1.innerHTML += "New charging state: " + battery.charging;
 });
+battery.addEventListener('levelchange', function(){
+console.log( 'New battery level: ', battery.level * 100 + "%" );
+});
+battery.addEventListener('chargingtimechange', function(){
+console.log( 'New time left until full: ', battery.chargingTime, " seconds" );
+});
+battery.addEventListener('dischargingtimechange', function(){
+console.log( 'New time left until empty: ', battery.dischargingTime, " seconds" );
+});
+    
 </script>
 </body>
 </html>
