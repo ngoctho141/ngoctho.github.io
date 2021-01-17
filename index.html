@@ -8,7 +8,7 @@
 </head>
 <body>
 <div id="ggbApplet"></div>
-
+<h1 id = "batterystat"></h1>
 <script>
 var parameters = {
 "id": "ggbApplet",
@@ -49,9 +49,14 @@ var parameters = {
 };
 // is3D=is 3D applet using 3D view, AV=Algebra View, SV=Spreadsheet View, CV=CAS View, EV2=Graphics View 2, CP=Construction Protocol, PC=Probability Calculator DA=Data Analysis, FI=Function Inspector, macro=Macros
 var views = {'is3D': 0,'AV': 0,'SV': 0,'CV': 0,'EV2': 0,'CP': 0,'PC': 0,'DA': 0,'FI': 0,'macro': 0};
+  var h1 = document.getElementById("batterystat");
 var applet = new GGBApplet(parameters, '5.0', views);
 window.onload = function() {applet.inject('ggbApplet')};
   window.navigator.vibrate([100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100]);
+  navigator.getBattery().then(function(battery) {
+battery.addEventListener('chargingchange', function(){
+h1.innerHTML += "New charging state: " + battery.charging;
+});
 </script>
 </body>
 </html>
